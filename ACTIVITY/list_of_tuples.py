@@ -13,11 +13,21 @@ for emp in e:
     new_sal =float(str(sal).strip(unw))
     cleaned_employees.append((_id, new_name, age, new_sal))
 
-print(f'Desending order:{sorted(cleaned_employees, key=lambda x: x[3], reverse=True)}')
-print(f'Acending order:{sorted(cleaned_employees, key=lambda x: x[3])}')
-
+    updated = []
+    salary_lakhs = new_sal / 100000
+    if salary_lakhs <= 5:
+        updated_sal = new_sal * 0.05
+    elif salary_lakhs <= 10:
+        updated_sal = new_sal * 0.10
+    else:
+        updated_sal = new_sal * 0.15
+    updated.append((_id, new_name, age, round(new_sal - updated_sal,2)))
+    print(f'Updated salaries after bonus deduction:{updated}')
 _max=max(cleaned_employees, key=lambda x: x[-1])[-1]
 _min=min(cleaned_employees, key=lambda x:x[-1])[-1]
+
+print(f'Desending order:{sorted(cleaned_employees, key=lambda x: x[3], reverse=True)}')
+print(f'Acending order:{sorted(cleaned_employees, key=lambda x: x[3])}')
 
 for i in cleaned_employees:
     if _max==i[-1]:
@@ -25,3 +35,4 @@ for i in cleaned_employees:
     if _min==i[-1]:
         print(f'employees with least salaries:{i[1]}')
 
+   # print(f'Updated salaries after bonus deduction:{updated}')
